@@ -1,6 +1,6 @@
 import type { AWS } from '@serverless/typescript';
-
-import hello from '@functions/hello';
+import {MyCustomRole} from 'resources';
+import {Functions} from "./functions";
 
 const serverlessConfiguration: AWS = {
   service: 'aws',
@@ -20,7 +20,7 @@ const serverlessConfiguration: AWS = {
     },
   },
   // import the function via paths
-  functions: { hello },
+  functions: Functions,
   package: { individually: true },
   custom: {
     esbuild: {
@@ -34,6 +34,11 @@ const serverlessConfiguration: AWS = {
       concurrency: 10,
     },
   },
+  resources: {
+    Resources: {
+    MyCustomRole,
+    },
+    },
 };
 
 module.exports = serverlessConfiguration;
